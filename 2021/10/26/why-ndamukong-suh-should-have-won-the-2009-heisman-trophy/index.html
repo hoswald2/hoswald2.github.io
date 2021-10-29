@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">5 min read</span>
+    <span class="article-duration">6 min read</span>
     
 
     <h1 class="article-title">Why Ndamukong Suh should have won the 2009 Heisman Trophy</h1>
@@ -192,7 +192,28 @@ As you can see from the waffle chart above, Alabama’s defensive line had more 
 BamaDline_TFL &lt;- bama_TFL %&gt;%
   filter(Pos == &quot;DL&quot;)</code></pre>
 <pre class="r"><code>TFL &lt;- bind_rows(Suh_TFL, BamaDline_TFL)</code></pre>
-<p>Ndamukong Suh should have won the 2009 Heisman Trophy. He almost caught the national champion Alabama’s defensive line in almost every major defensive stat category.</p>
+<p>I have combined two data frames into one by putting Ndamukong Suh with the Alabama defensive line. I want to compare how the Alabama defensive lineman stacked up against Suh by looking at tackles for loss and the amount of yards they gathered for each tackle for loss.</p>
+<pre class="r"><code> Suh &lt;-TFL %&gt;% filter(Name == &quot;Ndamukong Suh&quot;)</code></pre>
+<pre class="r"><code>ggplot() + 
+  geom_point(data=TFL, aes(x=TFL, y=`TFL Yards`), color=&quot;light grey&quot;) +
+  geom_point(data=TFL, aes(x=TFL, y=`TFL Yards`)) +
+  geom_point(data=Suh, aes(x=TFL, y=`TFL Yards`), color=&quot;red&quot;) +
+  geom_hline(yintercept=45, color=&quot;dark grey&quot;) + 
+  geom_vline(xintercept=10, color=&quot;dark grey&quot;) + 
+  geom_text_repel(data=TFL, aes(x=TFL, y=`TFL Yards`, label= Name)) +
+  labs(x=&quot;Total Tackles for Loss&quot;, y=&quot;Total Tackles for Loss Yards&quot;, title=&quot;Ndamukong Suh stomps Alabama defensive lineman in Tackles for Loss stats&quot;, subtitle=&quot;That&#39;s why he won every major defensive award.&quot;, caption=&quot;Source: cfbstats.com | By Hayes Oswald&quot;) +
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = &quot;bold&quot;),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 7),
+    axis.ticks = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank()
+  )</code></pre>
+<p><img src="/post/2021-10-26-why-ndamakong-suh-should-have-won-the-2009-heisman-trophy/nSuhpost_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+As you can see from the chart we just mutated, no Alabama defensive lineman came close to touching Ndamukong Suh in TFL stats. You can tell from the chart that Suh was so much more effective that it doesn’t even look like he belongs on the chart.</p>
+<p>You can see how Suh stands out above the rest by with his 20.5 TFLs and his 93 tackles for loss yards. The next closest player was Marcell Dareus a great lineman himself but Suh outperformed him by a mile just adding to the argument of why that 2009 Heisman Trophy should have been his.</p>
 
     </div>
   </article>
