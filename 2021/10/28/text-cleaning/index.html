@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">1 min read</span>
+    <span class="article-duration">2 min read</span>
     
 
     <h1 class="article-title">Text Cleaning</h1>
@@ -76,6 +76,7 @@
 <script src="http://hayesoswald.github.io/2021/10/28/text-cleaning/index_files/header-attrs/header-attrs.js"></script>
 
 
+<p>This is my post to show the worst games of the college football season in terms of score differential</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
@@ -96,6 +97,41 @@
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>I separated the columns to display whether it was a win, a loss and then the score and which team scored how many points.</p>
 <pre class="r"><code>football &lt;- football %&gt;% separate(Result, into=c(&quot;Outcome&quot;, &quot;Score&quot;), sep=&quot; &quot;) %&gt;% mutate(Score = gsub(&quot;)&quot;, &quot;&quot;, Score, fixed=TRUE)) %&gt;%  mutate(Score = gsub(&quot;(&quot;, &quot;&quot;, Score, fixed=TRUE)) %&gt;% separate(Score, into=c(&quot;TeamScore&quot;, &quot;OpponentScore&quot;), sep=&quot;-&quot;)</code></pre>
+<p>After mutating the data, I then mutated the points scored to show it as a number.</p>
+<pre class="r"><code>football &lt;- football %&gt;% mutate(TeamScore = as.numeric(TeamScore), OpponentScore = as.numeric(OpponentScore))</code></pre>
+<p>I now created to show the differential between team and opponent score to show the biggest differences.
+I will also mutate a new field to show the worst game had a differential of greater than 65</p>
+<pre class="r"><code>football &lt;- football %&gt;% mutate(Differential = TeamScore - OpponentScore)</code></pre>
+<pre class="r"><code>worstgames &lt;- football %&gt;% filter(Differential &gt; 65)</code></pre>
+<pre class="r"><code>library(ggalt)</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggalt&#39;:
+##   method                  from   
+##   grid.draw.absoluteGrob  ggplot2
+##   grobHeight.absoluteGrob ggplot2
+##   grobWidth.absoluteGrob  ggplot2
+##   grobX.absoluteGrob      ggplot2
+##   grobY.absoluteGrob      ggplot2</code></pre>
+<pre class="r"><code>library(ggrepel)</code></pre>
+<pre class="r"><code>ggplot() + 
+  geom_point(
+    data=football, 
+    aes(x=TeamScore, y=OpponentScore), 
+    color=&quot;grey&quot;, 
+    alpha=.5) + 
+  geom_point(
+    data=worstgames, 
+     aes(x=TeamScore, y=OpponentScore), 
+    color=&quot;red&quot;)  +
+    geom_encircle(data=worstgames,  aes(x=TeamScore, y=OpponentScore), s_shape=.05, expand=.05, colour=&quot;red&quot;) +
+ labs(x=&quot;Team Points per Game&quot;, y=&quot;Opponent Points per game&quot;, title=&quot;Some teams fire offensively, some don&#39;t&quot;,subtitle = &quot;You don&#39;t want to be the bottom five&quot;, caption=&quot;Source: Sports Reference | By Hayes Oswald&quot;) +  
+  theme_minimal() +  theme(
+    plot.title = element_text(size = 12, face = &quot;bold&quot;),
+    axis.title = element_text(size = 6), 
+    plot.subtitle = element_text(size=8), 
+    panel.grid.minor = element_blank()
+    ) +
+  geom_text_repel(data=worstgames, aes(x=TeamScore, y=OpponentScore, label=Opponent))</code></pre>
+<p><img src="http://hayesoswald.github.io/2021/10/28/text-cleaning/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 
     </div>
   </article>
