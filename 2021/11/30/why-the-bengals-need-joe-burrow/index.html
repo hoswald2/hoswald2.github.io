@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">2 min read</span>
+    <span class="article-duration">3 min read</span>
     
 
     <h1 class="article-title">Why the Bengals need Joe Burrow</h1>
@@ -118,6 +118,28 @@ library(ggrepel)</code></pre>
 <pre><code>## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Let’s see if Joe Burrow’s injury was as big of a factor as it seemed for the Bengals. I want to focus on how the Bengals fared during the season in scoring, passing and rushing with and without Joe Burrow.</p>
+<p>Let’s take a look at the Bengals scoring.</p>
+<pre class="r"><code>burrow %&gt;% summarise(sum(TeamScore/10))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   `sum(TeamScore/10)`
+##                 &lt;dbl&gt;
+## 1                21.3</code></pre>
+<pre class="r"><code>noburrow %&gt;% summarise(sum(TeamScore/6))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   `sum(TeamScore/6)`
+##                &lt;dbl&gt;
+## 1               16.3</code></pre>
+<p>Now that we have the average scoring of the Bengals with and without Burrow we can create a waffle chart to compare how many points the Bengals averaged with Burrow at quarterback and without him at the helm.</p>
+<pre class="r"><code>burrow_noburrow_scoring &lt;- c(&quot;With Burrow&quot;=21.3, &quot;Without Burrow&quot;=16.3)</code></pre>
+<pre class="r"><code>waffle(
+        burrow_noburrow_scoring, 
+        rows = 3, 
+        title= &quot;Bengals more explosive with Burrow&quot;, 
+        xlab=&quot;1 square = 1 point&quot;, 
+        colors = c(&quot;orange&quot;, &quot;black&quot;)) + labs(caption = &quot;Source: www.pro-football-reference.com | By Hayes Oswald&quot;, subtitle = &quot;But not by much.&quot;)</code></pre>
+<p><img src="/post/2021-11-30-why-the-bengals-need-joe-burrow/burrowpost_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+As you can see from the chart the Bengals only averaged around 5 more points per game than without Joe Burrow as the starting quarterback. This surprised me a little bit considering how the Bengals changed their whole offensive scheme without Burrow but still almost averaged the same amount of points.</p>
 
     </div>
   </article>
