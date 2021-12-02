@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">3 min read</span>
+    <span class="article-duration">4 min read</span>
     
 
     <h1 class="article-title">Why the Bengals need Joe Burrow</h1>
@@ -140,6 +140,19 @@ library(ggrepel)</code></pre>
         colors = c(&quot;orange&quot;, &quot;black&quot;)) + labs(caption = &quot;Source: www.pro-football-reference.com | By Hayes Oswald&quot;, subtitle = &quot;But not by much.&quot;)</code></pre>
 <p><img src="/post/2021-11-30-why-the-bengals-need-joe-burrow/burrowpost_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 As you can see from the chart the Bengals only averaged around 5 more points per game than without Joe Burrow as the starting quarterback. This surprised me a little bit considering how the Bengals changed their whole offensive scheme without Burrow but still averaged just under a touchdown less than with Burrow.</p>
+<p>Now I want to take a look at the difference in passing yards in the Bengals season comparing them with and without Burrow. I want to compare each data frame with the total passing yards from week to week.</p>
+<pre class="r"><code>ggplot() + 
+  geom_line(data=burrow, aes(x=Week, y=PYDS), color=&quot;orange&quot;) + 
+  geom_line(data=noburrow, aes(x=Week, y=PYDS), color=&quot;black&quot;) +
+   labs(
+    x= &quot;Week&quot;,
+    y=&quot;Total Bengals Passing Yards&quot;,
+    title = &quot;Unpredictable roller coaster ride of Bengals passing&quot;,
+    subtitle = &quot;The Bengals need Burrow slinging the ball&quot;,
+    caption=&quot;Source: www.pro-football-reference.com | By: Hayes Oswald&quot;
+  )</code></pre>
+<p><img src="/post/2021-11-30-why-the-bengals-need-joe-burrow/burrowpost_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+You can see from the chart the we created above that the Bengals were a lot more consistent with Burrow at quarterback then without him. They had some done weeks under Burrow but consistently stayed around the 250-280 passing yards mark. That is not the same for the Bengals without Burrow as they went on a roller coaster ride each week passing hitting a high of 371 and a low of 48 yards.</p>
 
     </div>
   </article>
