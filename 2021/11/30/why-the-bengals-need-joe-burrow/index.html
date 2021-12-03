@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">4 min read</span>
+    <span class="article-duration">6 min read</span>
     
 
     <h1 class="article-title">Why the Bengals need Joe Burrow</h1>
@@ -137,7 +137,9 @@ library(ggrepel)</code></pre>
         rows = 3, 
         title= &quot;Bengals more explosive with Burrow&quot;, 
         xlab=&quot;1 square = 1 point&quot;, 
-        colors = c(&quot;orange&quot;, &quot;black&quot;)) + labs(caption = &quot;Source: www.pro-football-reference.com | By Hayes Oswald&quot;, subtitle = &quot;But not by much.&quot;)</code></pre>
+        colors = c(&quot;orange&quot;, &quot;black&quot;)) + labs(caption = &quot;Source: www.pro-football-reference.com | By Hayes Oswald&quot;, subtitle = &quot;But not by much.&quot;) + theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = &quot;bold&quot;))</code></pre>
 <p><img src="/post/2021-11-30-why-the-bengals-need-joe-burrow/burrowpost_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 As you can see from the chart the Bengals only averaged around 5 more points per game than without Joe Burrow as the starting quarterback. This surprised me a little bit considering how the Bengals changed their whole offensive scheme without Burrow but still averaged just under a touchdown less than with Burrow.</p>
 <p>Now I want to take a look at the difference in passing yards in the Bengals season comparing them with and without Burrow. I want to compare each data frame with the total passing yards from week to week.</p>
@@ -153,10 +155,33 @@ As you can see from the chart the Bengals only averaged around 5 more points per
   ) +
   theme_minimal() +
   geom_text(aes(x=4.5, y=350, label=&quot;With Burrow&quot;), color=&quot;orange&quot;) +
-  geom_text(aes(x=13.5, y=250, label=&quot;Without Burrow&quot;), color=&quot;black&quot;)</code></pre>
+  geom_text(aes(x=13.5, y=250, label=&quot;Without Burrow&quot;), color=&quot;black&quot;) +
+  theme(
+    plot.title = element_text(size = 14, face = &quot;bold&quot;),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 7))</code></pre>
 <p><img src="/post/2021-11-30-why-the-bengals-need-joe-burrow/burrowpost_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 You can see from the chart the we created above that the Bengals were a lot more consistent with Burrow at quarterback then without him. They had some down weeks under Burrow but consistently stayed around the 250-280 passing yards mark. That is not the same for the Bengals without Burrow as they went on a roller coaster ride each week passing, hitting a high of 371 and a low of 48 yards.</p>
 <p>Now that we found how badly the Bengals needed Joe Burrow the in the passing game, let’s check how it effected their rushing game. I know that the quarterback doesn’t run the ball a lot to effect the rushing game as much as the running back but they still play a vital role in how the rushing game performs. Let’s see how losing Burrow effected the Bengals rushing offense.</p>
+<pre class="r"><code>Rushing &lt;- bind_rows(burrow, noburrow)</code></pre>
+<pre class="r"><code>ggplot() + 
+  geom_bar(data=Rushing, aes(x=Week, weight=`RYDS`), color=&quot;orange&quot; ) +
+  labs(
+    title=&quot;The rising and falling of Bengals rushing&quot;, 
+    subtitle = &quot;With no Burrow comes sight rushing cosistency&quot;,
+    caption = &quot;Source: www.pro-football-reference.com | By: Hayes Oswald&quot;,
+    x=&quot;Week&quot;, 
+    y=&quot;Rushing Yards&quot;
+) +
+  theme_minimal() + 
+  geom_text(aes(x=15, y=190, label=&quot;No Burrow weeks 12-17&quot;), color=&quot;black&quot;) +
+  theme(
+    plot.title = element_text(size = 14, face = &quot;bold&quot;),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 7))</code></pre>
+<p><img src="/post/2021-11-30-why-the-bengals-need-joe-burrow/burrowpost_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+From what the chart shows shows us, the Bengals really struggled to establish the rushing game. Burrow was the starting quarterback up until Week 11 and you can see that those first two weeks under a back-up quarterback the rushing game was awful, not even hitting 50 yards in Weeks 12 and 13. But after that the Bengals actually started to get in a rhythm rushing and showed solid consistency in the last three weeks of the season. Was this because there was no Burrow to pass the ball or because running the ball was the only thing the Bengals could do to end the 2020 season.</p>
+<p>From what we have found in our charts, you can see that Joe Burrow showed a glimpse of what he is capable of as the Bengals quarterback. But there were also a lot of inconsistencies by the rookie quarterback. The numbers in scoring, passing and rushing were a lot closer than I expected. But, you have to remember this was Burrow’s rookie year and every great quarterback struggle in their rookie year. But, looking at the data you can see that the Bengals need Burrow to be a great team and were a better team with him, and that is showing in the 2021 season with a healthy, confident Joe Burrow.</p>
 
     </div>
   </article>
