@@ -150,9 +150,13 @@ As you can see from the chart the Bengals only averaged around 5 more points per
     title = &quot;Unpredictable roller coaster ride of Bengals passing&quot;,
     subtitle = &quot;The Bengals need Burrow slinging the ball&quot;,
     caption=&quot;Source: www.pro-football-reference.com | By: Hayes Oswald&quot;
-  )</code></pre>
+  ) +
+  theme_minimal() +
+  geom_text(aes(x=4.5, y=350, label=&quot;With Burrow&quot;), color=&quot;orange&quot;) +
+  geom_text(aes(x=13.5, y=250, label=&quot;Without Burrow&quot;), color=&quot;black&quot;)</code></pre>
 <p><img src="/post/2021-11-30-why-the-bengals-need-joe-burrow/burrowpost_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 You can see from the chart the we created above that the Bengals were a lot more consistent with Burrow at quarterback then without him. They had some down weeks under Burrow but consistently stayed around the 250-280 passing yards mark. That is not the same for the Bengals without Burrow as they went on a roller coaster ride each week passing, hitting a high of 371 and a low of 48 yards.</p>
+<p>Now that we found how badly the Bengals needed Joe Burrow the in the passing game, let’s check how it effected their rushing game. I know that the quarterback doesn’t run the ball a lot to effect the rushing game as much as the running back but they still play a vital role in how the rushing game performs. Let’s see how losing Burrow effected the Bengals rushing offense.</p>
 
     </div>
   </article>
